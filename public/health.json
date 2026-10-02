@@ -1,1 +1,1 @@
-{"status":"ok","build":"recovery-saas-v2","mode":"local-persistence","tests":22}
+{"status":"ok","build":"recovery-saas-v2","mode":"local-browser-persistence","repo_tests":4}
