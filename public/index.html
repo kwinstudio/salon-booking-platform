@@ -3,37 +3,85 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="robots" content="noindex,nofollow" />
-  <meta name="theme-color" content="#101828" />
-  <title>Salon Booking Platform — Recovery Build</title>
-  <style>
-    :root{color-scheme:dark;--bg:#0b0f17;--panel:#121826;--muted:#98a2b3;--text:#f8fafc;--line:#263041;--good:#32d583;--warn:#fdb022}
-    *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top right,#1c1533 0,transparent 32%),var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--text)}
-    main{max-width:1040px;margin:0 auto;padding:56px 20px 72px}.badge{display:inline-flex;align-items:center;gap:8px;border:1px solid #344054;border-radius:999px;padding:7px 12px;font-size:13px;color:#d0d5dd;background:#101828}.dot{width:8px;height:8px;border-radius:50%;background:var(--good);box-shadow:0 0 0 4px #32d58318}
-    h1{font-size:clamp(42px,8vw,76px);line-height:.95;letter-spacing:-.055em;margin:28px 0 20px;max-width:900px}.lead{max-width:760px;font-size:18px;line-height:1.65;color:#cbd5e1;margin:0 0 38px}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.card{background:linear-gradient(180deg,#141b2a,#101622);border:1px solid var(--line);border-radius:20px;padding:22px;min-height:150px}.label{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:14px}.value{font-size:28px;font-weight:750;letter-spacing:-.03em}.sub{font-size:14px;line-height:1.55;color:var(--muted);margin-top:8px}.section{margin-top:52px}.section h2{font-size:26px;letter-spacing:-.03em;margin-bottom:16px}.stack{display:grid;gap:12px}.row{display:flex;justify-content:space-between;gap:24px;align-items:center;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:#0e1420}.row strong{font-size:15px}.status{font-size:13px;border-radius:999px;padding:6px 10px;white-space:nowrap}.status.good{background:#06764733;color:#6ce9a6}.status.warn{background:#b5470833;color:#fec84b}.foot{margin-top:54px;padding-top:24px;border-top:1px solid var(--line);font-size:13px;line-height:1.6;color:var(--muted)}
-    @media(max-width:760px){main{padding-top:34px}.grid{grid-template-columns:1fr}.row{align-items:flex-start;flex-direction:column;gap:10px}.card{min-height:0}}
-  </style>
+  <meta name="theme-color" content="#15111f" />
+  <meta name="description" content="Salon Booking Platform — recovery SaaS build" />
+  <title>Salon Booking Platform</title>
+  <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
-<main>
-  <div class="badge"><span class="dot"></span>Live recovery build</div>
-  <h1>Salon Booking Platform</h1>
-  <p class="lead">Dit is de gecontroleerde recovery-build van het salonplatform. De huidige bewaarde code bevat security-hardening rond treatment records en bijbehorende tests. De volledige eerder ontwikkelde applicatie wordt nog opnieuw opgebouwd in deze repository.</p>
-  <section class="grid" aria-label="Release status">
-    <article class="card"><div class="label">Laatste lokale gate</div><div class="value">18 / 18</div><div class="sub">Alle huidige recovery-tests zijn opnieuw geslaagd vóór deze deploy.</div></article>
-    <article class="card"><div class="label">Deploy status</div><div class="value">Recovery</div><div class="sub">Alleen aantoonbaar teruggevonden en gevalideerde onderdelen worden als voltooid gemarkeerd.</div></article>
-    <article class="card"><div class="label">Hosting</div><div class="value">Render</div><div class="sub">Publieke statische statusbuild zonder productieklantdata of secrets.</div></article>
-  </section>
-  <section class="section">
-    <h2>Huidige checkpoint</h2>
-    <div class="stack">
-      <div class="row"><strong>Treatment notes &amp; SOAP security hardening</strong><span class="status good">Getest</span></div>
-      <div class="row"><strong>Private treatment-file validatie &amp; signed URL contract</strong><span class="status good">Getest</span></div>
-      <div class="row"><strong>Public-payload blocking &amp; log redaction</strong><span class="status good">Getest</span></div>
-      <div class="row"><strong>Complete booking, CRM, POS en salon-UI</strong><span class="status warn">Nog herstellen</span></div>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Hoofdnavigatie">
+      <a class="brand" href="#dashboard" aria-label="Salon Booking home">
+        <span class="brand-mark">S</span>
+        <span><strong id="brand-name">Studio Nova</strong><small>Salon Booking</small></span>
+      </a>
+      <nav class="nav" id="main-nav">
+        <a href="#dashboard" data-route="dashboard"><span>⌂</span>Overzicht</a>
+        <a href="#agenda" data-route="agenda"><span>◫</span>Agenda</a>
+        <a href="#clients" data-route="clients"><span>◎</span>Klanten</a>
+        <a href="#services" data-route="services"><span>◇</span>Diensten</a>
+        <a href="#team" data-route="team"><span>♙</span>Team</a>
+        <a href="#waitlist" data-route="waitlist"><span>≋</span>Wachtlijst</a>
+        <a href="#settings" data-route="settings"><span>⚙</span>Instellingen</a>
+      </nav>
+      <div class="sidebar-foot">
+        <div class="status-dot"><i></i><span>Recovery SaaS live</span></div>
+        <small>Lokale demo-opslag</small>
+      </div>
+    </aside>
+
+    <div class="main-column">
+      <header class="topbar">
+        <button class="icon-btn mobile-menu" id="menu-button" aria-label="Open menu" aria-expanded="false">☰</button>
+        <div class="topbar-title"><span id="today-label"></span><strong id="page-title">Overzicht</strong></div>
+        <div class="topbar-actions">
+          <button class="ghost-btn" id="reset-demo">Demo resetten</button>
+          <button class="primary-btn" id="new-booking">+ Nieuwe afspraak</button>
+        </div>
+      </header>
+
+      <main id="app" tabindex="-1"></main>
     </div>
-  </section>
-  <p class="foot">Deze pagina staat bewust op <strong>noindex</strong>. Het is een technische recovery-build en geen claim dat de volledige salon-SaaS al productie-klaar is.</p>
-</main>
+  </div>
+
+  <nav class="mobile-nav" aria-label="Mobiele navigatie">
+    <a href="#dashboard" data-route="dashboard">⌂<span>Home</span></a>
+    <a href="#agenda" data-route="agenda">◫<span>Agenda</span></a>
+    <button id="mobile-new-booking" aria-label="Nieuwe afspraak">+</button>
+    <a href="#clients" data-route="clients">◎<span>Klanten</span></a>
+    <a href="#settings" data-route="settings">⚙<span>Meer</span></a>
+  </nav>
+
+  <dialog id="booking-dialog" class="modal">
+    <form method="dialog" id="booking-form">
+      <div class="modal-head">
+        <div><small>Nieuwe afspraak</small><h2>Boeking toevoegen</h2></div>
+        <button value="cancel" class="icon-btn" aria-label="Sluiten">×</button>
+      </div>
+      <div class="form-grid">
+        <label>Klanten<select id="booking-client" required></select></label>
+        <label>Dienst<select id="booking-service" required></select></label>
+        <label>Medewerker<select id="booking-staff" required></select></label>
+        <label>Datum<input id="booking-date" type="date" required /></label>
+        <label>Tijd<input id="booking-time" type="time" step="900" required /></label>
+        <label>Status<select id="booking-status"><option value="confirmed">Bevestigd</option><option value="pending">In afwachting</option></select></label>
+      </div>
+      <p class="form-hint">Deze recovery-build bewaart data alleen lokaal in deze browser. Dubbele afspraken voor dezelfde medewerker worden geblokkeerd.</p>
+      <div class="modal-actions"><button value="cancel" class="ghost-btn">Annuleren</button><button type="submit" value="default" class="primary-btn">Afspraak opslaan</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="client-dialog" class="modal small-modal">
+    <form method="dialog" id="client-form">
+      <div class="modal-head"><div><small>CRM</small><h2>Nieuwe klant</h2></div><button value="cancel" class="icon-btn">×</button></div>
+      <label>Naam<input id="client-name" required placeholder="Voor- en achternaam" /></label>
+      <label>E-mail<input id="client-email" type="email" placeholder="naam@voorbeeld.nl" /></label>
+      <label>Telefoon<input id="client-phone" type="tel" placeholder="06 12 34 56 78" /></label>
+      <div class="modal-actions"><button value="cancel" class="ghost-btn">Annuleren</button><button type="submit" value="default" class="primary-btn">Klant opslaan</button></div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="/app.js"></script>
 </body>
 </html>
