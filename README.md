@@ -1,14 +1,33 @@
-# Salon Booking Platform — Recovery Build
+# Salon Booking Platform — Recovery SaaS
 
-Dit repository is de gecontroleerde recovery-lijn voor het salon booking & business management platform.
+Dit repository bevat de huidige live recovery-build van het salon booking platform.
 
-## Huidige status
+## Wat nu live werkt
 
-- Recovery/security-module lokaal opnieuw gevalideerd: 18/18 tests PASS.
-- Deze Render-deploy is bewust een recovery-statusbuild.
-- De volledige eerder ontwikkelde booking/CRM/POS salon-app is nog niet volledig gereconstrueerd in deze repository.
-- Geen productieklantdata of secrets worden in deze statusbuild gebruikt.
+- dashboard met dag-KPI's;
+- agenda per datum;
+- nieuwe afspraken toevoegen;
+- overlap/conflictcontrole per medewerker;
+- klantenoverzicht en klant toevoegen;
+- diensten;
+- team;
+- wachtlijst;
+- saloninstellingen;
+- responsive mobiele navigatie;
+- lokale browseropslag via localStorage.
 
-## Deployment
+## Belangrijke beperking
 
-De publieke statusbuild wordt als Render Static Site gepubliceerd vanuit `public/`.
+Dit is nog niet de uiteindelijke productie-SaaS. De live recovery-build gebruikt lokale browseropslag en heeft nog geen dedicated Supabase-productiedatabase, Auth of server-side multi-tenant booking engine gekoppeld.
+
+## Test
+
+```bash
+npm test
+```
+
+De huidige repository bevat 4 dependency-free UI-contracttests. De uitgebreidere treatment-record/security recoverypatches bestaan nog in de lokale herstelworkspace en moeten in een volgende integratieronde naar deze repository worden teruggebracht en tegen een dedicated Supabase testomgeving worden uitgevoerd.
+
+## Hosting
+
+Render Static Site, branch `main`, publish directory `public/`.
