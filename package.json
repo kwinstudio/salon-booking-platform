@@ -1,0 +1,12 @@
+{
+  "name": "salon-booking-platform-recovery",
+  "private": true,
+  "version": "0.0.0-recovery",
+  "type": "module",
+  "scripts": {
+    "test:patches": "node --experimental-strip-types --test tests/patches/*.test.mjs",
+    "test:core": "npm run test:patches && npm run test:ui",
+    "build": "npm run test:core",
+    "test:ui": "node --test tests/ui-contract.test.mjs"
+  }
+}

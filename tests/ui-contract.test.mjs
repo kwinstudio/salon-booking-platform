@@ -1,0 +1,10 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const html=fs.readFileSync(new URL('../public/index.html',import.meta.url),'utf8');
+const js=fs.readFileSync(new URL('../public/app.js',import.meta.url),'utf8');
+const css=fs.readFileSync(new URL('../public/styles.css',import.meta.url),'utf8');
+test('ships the primary SaaS navigation',()=>{for(const x of ['Overzicht','Agenda','Klanten','Diensten','Team','Wachtlijst','Instellingen'])assert.match(html,new RegExp(x))});
+test('booking flow has client, service, staff, date and time fields',()=>{for(const id of ['booking-client','booking-service','booking-staff','booking-date','booking-time'])assert.match(html,new RegExp(id))});
+test('client-side booking conflict protection is present',()=>{assert.match(js,/function conflict\(/);assert.match(js,/Deze medewerker heeft dan al een afspraak/)});
+test('responsive mobile navigation is present',()=>{assert.match(html,/mobile-nav/);assert.match(css,/@media\(max-width:760px\)/)});
